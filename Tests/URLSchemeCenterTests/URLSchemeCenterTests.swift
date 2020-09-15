@@ -5,7 +5,7 @@ final class URLSchemeCenterTests: XCTestCase {
     func testExample() {
         URLSchemeCenter.center.register(seheme: DataCollect.self, {DataCollect()})
         URLSchemeCenter.center.router(url: "pineal://DataCollection/topic?name=1&age=3")
-        URLSchemeCenter.center.router(url: "pineal://DataCollection/delete?id=1&name=3")
+        URLSchemeCenter.center.router(url: "BaDouApp://DataCollection/delete?index=1&imageUrls=url1&imageUrls=url2&imageUrls=url3")
     }
 
     static var allTests = [

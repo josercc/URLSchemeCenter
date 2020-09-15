@@ -56,15 +56,27 @@ public class URLSchemeCenter {
         for action in actions {
             if urlComponments.path == action.path {
                 let queryItems:[URLQueryItem] = urlComponments.queryItems ?? []
-                var parameters:[String:String] = [:]
-                for item in queryItems {
-                    parameters[item.name] = item.value
-                }
+                let parameters:[String:String] = self.queryItemsToDic(queryItems: queryItems)
                 action.action(urlScheme, parameters)
                 return true
             }
         }
         return false
+    }
+    
+    /// 将`URLQueryItem`数组转换成字典 如果是数组类型 则用,分割的字符串
+    /// - Parameter queryItems: `URLQueryItem`数组
+    /// - Returns: 字符串类型字典
+    func queryItemsToDic(queryItems:[URLQueryItem]) -> [String:String] {
+        var arrayDic:[String:[String]] = [:]
+        for item in queryItems {
+            var list:[String] = arrayDic[item.name] ?? []
+            if let value = item.value {
+                list.append(value)
+            }
+            arrayDic[item.name] = list
+        }
+        return arrayDic.mapValues({$0.joined(separator: ",")})
     }
 }
 
