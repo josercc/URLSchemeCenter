@@ -26,6 +26,4 @@ struct DataCollect: URLScheme {
     static var host: String {
         return "DataCollection"
     }
-    
-    
 }
